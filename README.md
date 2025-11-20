@@ -36,6 +36,7 @@ coding directly within your editor.
   --- @type Cursor-Agent.Config
   opts = {
     use_default_mappings = true,
+   show_help_on_open = true,
   },
 }
 ```
@@ -52,6 +53,7 @@ coding directly within your editor.
   --- @type Cursor-Agent.Config
   opts = {
     use_default_mappings = true,
+   show_help_on_open = true,
   },
 }
 ```
@@ -65,6 +67,7 @@ use {
   config = function()
     require("cursor-agent").setup({
       use_default_mappings = true,
+     show_help_on_open = true,
     })
   end
 }
@@ -78,14 +81,16 @@ use {
 require("cursor-agent").setup({
   -- Enable default keymaps
   use_default_mappings = true,
+  show_help_on_open = true,
 })
 ```
 
 ### Configuration Options
 
-| Option                 | Type      | Default | Description                         |
-| ---------------------- | --------- | ------- | ----------------------------------- |
-| `use_default_mappings` | `boolean` | `true`  | Whether to use default key mappings |
+| Option                 | Type      | Default | Description                          |
+| ---------------------- | --------- | ------- | ------------------------------------ |
+| `use_default_mappings` | `boolean` | `true`  | Whether to use default key mappings  |
+| `show_help_on_open`    | `boolean` | `true`  | Show help screen when terminal opens |
 
 ## 🎮 Usage
 
@@ -187,7 +192,6 @@ Contributions are welcome! Feel free to submit issues and pull requests.
 
 ## 📝 TODO
 
-- [ ] Replace Snacks dependency with native Neovim APIs
 - [ ] Improve terminal management (windows and buffers)
 - [ ] Make keymaps fully configurable
 - [ ] Add more commands and options

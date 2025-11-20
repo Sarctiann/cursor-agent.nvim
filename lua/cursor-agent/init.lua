@@ -1,10 +1,3 @@
--- TODO:
--- - replace Snacks with native Neovim APIs
--- - Improve terminal management (wins and bufs)
--- - Write and type options:
---   - Make keymaps configurable
---   - Add more commands and options ???
-
 --- @module 'Cursor-Agent'
 
 local config = require("cursor-agent.config")
@@ -17,11 +10,11 @@ local M = {}
 --- @param user_config Cursor-Agent.Config
 function M.setup(user_config)
 	-- Setup configuration
-	local opts = config.setup(user_config)
+	local configs = config.setup(user_config)
 
 	-- Create user command to open Cursor-Agent
-	vim.api.nvim_create_user_command("CursorAgent", function(cmd_opts)
-		local args = cmd_opts.args
+	vim.api.nvim_create_user_command("CursorAgent", function(opts)
+		local args = opts.args
 
 		if args == "open_cwd" or args == "" or not args then
 			commands.open_cwd()
@@ -41,14 +34,14 @@ function M.setup(user_config)
 	})
 
 	-- Setup default keymaps if enabled
-	if opts.use_default_mappings then
+	if configs.use_default_mappings then
 		vim.keymap.set("n", "<leader>aJ", commands.open_cwd, { desc = "Toggle Cursor-Agent (Current Dir)" })
 		vim.keymap.set("n", "<leader>aj", commands.open_git_root, { desc = "Toggle Cursor-Agent (Project Root)" })
 		vim.keymap.set("n", "<leader>al", commands.show_sessions, { desc = "Toggle Cursor-Agent (Show Sessions)" })
 	end
 
 	-- Setup autocommands
-	autocmds.setup()
+	autocmds.setup(configs)
 end
 
 return M

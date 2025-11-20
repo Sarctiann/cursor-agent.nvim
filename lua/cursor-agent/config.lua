@@ -1,11 +1,13 @@
 --- @class Cursor-Agent.Config
 --- @field use_default_mappings boolean|nil # Whether to use default key mappings (default: true)
+--- @field show_help_on_open boolean|nil # Whether to show help notification when opening the terminal (default: true)
 
 local M = {}
 
 --- Default configuration
 M.defaults = {
 	use_default_mappings = true,
+	show_help_on_open = true,
 }
 
 --- Current configuration
