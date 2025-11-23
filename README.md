@@ -21,6 +21,8 @@ coding directly within your editor.
 - Neovim >= 0.9.0
 - [Cursor CLI](https://cursor.com) installed and available in your `$PATH`
 - [snacks.nvim](https://github.com/folke/snacks.nvim) (for terminal and notifications)
+- NOTE: This plugin depends on [Snacks.nvim](https://github.com/folke/snacks.nvim)
+  for terminal management and notifications.
 
 ## 📦 Installation
 
