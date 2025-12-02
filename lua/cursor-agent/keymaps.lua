@@ -2,6 +2,7 @@
 local terminal = require("cursor-agent.terminal")
 local buffers = require("cursor-agent.buffers")
 local help = require("cursor-agent.help")
+local config = require("cursor-agent.config")
 
 local M = {}
 
@@ -29,7 +30,8 @@ function M.setup_terminal_keymaps()
 
 	-- Submit commands
 	vim.keymap.set("t", "<CR><CR>", function()
-		terminal.insert_text("\n")
+		local new_lines = string.rep("\n", config.options.new_lines_amount)
+		terminal.insert_text(new_lines)
 	end, opts)
 
 	vim.keymap.set("t", "<C-s>", function()
