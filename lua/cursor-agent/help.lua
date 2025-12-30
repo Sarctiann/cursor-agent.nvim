@@ -9,6 +9,7 @@ function M.show_help()
     · <M-q> | <Esc><Esc> : Normal Mode
     · <C-p>              : Add Buffer File Path
     · <C-p><C-p>         : Add All Open Buffer File Paths
+    · <C-f>              : Toggle Window Width
     ---
     · <CR><CR>           : New Line
     · <M-?> | ?? | \\    : Show Help
@@ -19,6 +20,7 @@ function M.show_help()
 
 Norm Mode:
     · q | <Esc>          : Hide
+    · <C-f>              : Toggle Window Width
     · <...>              (all other normal mode keys)
 
 Cursor-Agent commands:

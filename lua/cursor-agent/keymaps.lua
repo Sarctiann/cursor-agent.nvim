@@ -52,6 +52,13 @@ function M.setup_terminal_keymaps()
 	vim.keymap.set("n", "<Esc>", function()
 		vim.cmd("q")
 	end, opts)
+
+	-- Toggle window width (Ctrl+f) for modes i, t, n, v
+	local toggle_opts = { buffer = 0, silent = true }
+	vim.keymap.set("i", "<C-f>", terminal.toggle_width, toggle_opts)
+	vim.keymap.set("t", "<C-f>", terminal.toggle_width, toggle_opts)
+	vim.keymap.set("n", "<C-f>", terminal.toggle_width, toggle_opts)
+	vim.keymap.set("v", "<C-f>", terminal.toggle_width, toggle_opts)
 end
 
 return M

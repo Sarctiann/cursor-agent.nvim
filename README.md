@@ -36,9 +36,12 @@ coding directly within your editor.
     "folke/snacks.nvim",
   },
   --- @type Cursor-Agent.Config
+  -- These are the default values; you can use `opts = {}` to use defaults
   opts = {
     use_default_mappings = true,
-   show_help_on_open = true,
+    show_help_on_open = true,
+    new_lines_amount = 2,
+    window_width = 64,
   },
 }
 ```
@@ -53,9 +56,12 @@ coding directly within your editor.
     "folke/snacks.nvim",
   },
   --- @type Cursor-Agent.Config
+  -- These are the default values; you can use `opts = {}` to use defaults
   opts = {
     use_default_mappings = true,
-   show_help_on_open = true,
+    show_help_on_open = true,
+    new_lines_amount = 2,
+    window_width = 64,
   },
 }
 ```
@@ -67,9 +73,12 @@ use {
   "Sarctiann/cursor-agent.nvim",
   requires = { "folke/snacks.nvim" },
   config = function()
+    -- These are the default values; you can use `setup({})` to use defaults
     require("cursor-agent").setup({
       use_default_mappings = true,
-     show_help_on_open = true,
+      show_help_on_open = true,
+      new_lines_amount = 2,
+      window_width = 64,
     })
   end
 }
@@ -80,19 +89,23 @@ use {
 ### Default Configuration
 
 ```lua
+-- These are the default values; you can use `setup({})` to use defaults
 require("cursor-agent").setup({
-  -- Enable default keymaps
   use_default_mappings = true,
   show_help_on_open = true,
+  new_lines_amount = 2,
+  window_width = 64,
 })
 ```
 
 ### Configuration Options
 
-| Option                 | Type      | Default | Description                          |
-| ---------------------- | --------- | ------- | ------------------------------------ |
-| `use_default_mappings` | `boolean` | `true`  | Whether to use default key mappings  |
-| `show_help_on_open`    | `boolean` | `true`  | Show help screen when terminal opens |
+| Option                 | Type      | Default | Description                                            |
+| ---------------------- | --------- | ------- | ------------------------------------------------------ |
+| `use_default_mappings` | `boolean` | `true`  | Whether to use default key mappings                    |
+| `show_help_on_open`    | `boolean` | `true`  | Show help screen when terminal opens                   |
+| `new_lines_amount`     | `number`  | `2`     | Number of new lines to insert after command submission |
+| `window_width`         | `number`  | `64`    | Default width for the terminal window                  |
 
 ## 🎮 Usage
 
@@ -127,24 +140,26 @@ Once the Cursor Agent terminal is open, you have access to special keymaps:
 
 #### Terminal Mode
 
-| Keymap                  | Description                  |
-| ----------------------- | ---------------------------- |
-| `<C-s>` or `<CR><CR>`   | Submit command/message       |
-| `<M-q>` or `<Esc><Esc>` | Enter normal mode            |
-| `<C-p>`                 | Attach current file path     |
-| `<C-p><C-p>`            | Attach all open buffer paths |
-| `<M-?>` or `??` or `\\` | Show help                    |
-| `<C-c>`                 | Clear/Stop/Close             |
-| `<C-d>`                 | Close terminal               |
-| `<C-r>`                 | Review changes               |
-| `<CR>`                  | New line                     |
+| Keymap                  | Description                           |
+| ----------------------- | ------------------------------------- |
+| `<C-s>` or `<CR><CR>`   | Submit command/message                |
+| `<M-q>` or `<Esc><Esc>` | Enter normal mode                     |
+| `<C-p>`                 | Attach current file path              |
+| `<C-p><C-p>`            | Attach all open buffer paths          |
+| `<C-f>`                 | Toggle window width (expand/collapse) |
+| `<M-?>` or `??` or `\\` | Show help                             |
+| `<C-c>`                 | Clear/Stop/Close                      |
+| `<C-d>`                 | Close terminal                        |
+| `<C-r>`                 | Review changes                        |
+| `<CR>`                  | New line                              |
 
 #### Normal Mode (in terminal)
 
-| Keymap                                   | Description   |
-| ---------------------------------------- | ------------- |
-| `q` or `<Esc>`                           | Hide terminal |
-| All other normal mode keys work as usual |               |
+| Keymap                                   | Description                           |
+| ---------------------------------------- | ------------------------------------- |
+| `q` or `<Esc>`                           | Hide terminal                         |
+| `<C-f>`                                  | Toggle window width (expand/collapse) |
+| All other normal mode keys work as usual |                                       |
 
 ### Cursor Agent Commands
 
