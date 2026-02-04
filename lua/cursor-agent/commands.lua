@@ -10,7 +10,7 @@ function M.open_cwd()
 	if terminal.working_dir == "" then
 		terminal.working_dir = vim.fn.getcwd()
 	end
-	terminal.open_terminal("--browser --approve-mcps")
+	terminal.open_terminal()
 end
 
 --- Open Cursor-Agent in the project root (git root)
@@ -28,7 +28,7 @@ function M.open_git_root()
 	else
 		terminal.working_dir = current_dir ~= "" and current_dir or vim.fn.getcwd()
 	end
-	terminal.open_terminal("--browser --approve-mcps")
+	terminal.open_terminal()
 end
 
 --- Show Cursor-Agent sessions
