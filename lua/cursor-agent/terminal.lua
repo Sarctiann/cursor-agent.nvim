@@ -38,9 +38,15 @@ function M.attach_file_when_ready(file_path, tries)
 		end
 
 		local buf_lines = vim.api.nvim_buf_get_lines(M.term_buf, 0, 5, false)
-
-		-- Check if line 2 matches " Cursor Agent"
-		if buf_lines[2] and buf_lines[2]:match(" Cursor Agent") then
+		-- Check if any of the first 5 lines matches " Cursor Agent"
+		local found = false
+		for i = 1, #buf_lines do
+			if buf_lines[i] and buf_lines[i]:match(" Cursor Agent") then
+				found = true
+				break
+			end
+		end
+		if found then
 			M.insert_text("@" .. file_path .. "\n\n")
 			return
 		end

@@ -209,7 +209,6 @@ Contributions are welcome! Feel free to submit issues and pull requests.
 
 ## 📝 TODO
 
-- [ ] Improve terminal management (windows and buffers)
 - [ ] Make keymaps fully configurable
 - [ ] Add more commands and options
 - [ ] Add tests
