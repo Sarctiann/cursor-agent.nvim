@@ -36,12 +36,8 @@ coding directly within your editor.
     "folke/snacks.nvim",
   },
   --- @type Cursor-Agent.Config
-  -- These are the default values; you can use `opts = {}` to use defaults
   opts = {
-    use_default_mappings = true,
-    show_help_on_open = true,
-    new_lines_amount = 2,
-    window_width = 64,
+    -- Configure your options here
   },
 }
 ```
@@ -56,12 +52,8 @@ coding directly within your editor.
     "folke/snacks.nvim",
   },
   --- @type Cursor-Agent.Config
-  -- These are the default values; you can use `opts = {}` to use defaults
   opts = {
-    use_default_mappings = true,
-    show_help_on_open = true,
-    new_lines_amount = 2,
-    window_width = 64,
+    -- Configure your options here
   },
 }
 ```
@@ -73,12 +65,8 @@ use {
   "Sarctiann/cursor-agent.nvim",
   requires = { "folke/snacks.nvim" },
   config = function()
-    -- These are the default values; you can use `setup({})` to use defaults
     require("cursor-agent").setup({
-      use_default_mappings = true,
-      show_help_on_open = true,
-      new_lines_amount = 2,
-      window_width = 64,
+      -- Configure your options here
     })
   end
 }
@@ -95,29 +83,107 @@ require("cursor-agent").setup({
   show_help_on_open = true,
   new_lines_amount = 2,
   window_width = 64,
+  open_mode = "normal",
+  cursor_window_keys = {
+    terminal_mode = {
+      normal_mode = { "<M-q>" },
+      insert_file_path = { "<C-p>" },
+      insert_all_buffers = { "<C-p><C-p>" },
+      new_lines = { "<CR><CR>" },
+      submit = { "<C-s>" },
+      enter = { "<CR>" },
+      help = { "<M-?>", "??", "\\\\" },
+      toggle_width = { "<C-f>" },
+    },
+    normal_mode = {
+      hide = { "<Esc>" },
+      toggle_width = { "<C-f>" },
+    },
+  },
 })
 ```
 
 ### Configuration Options
 
-| Option                 | Type      | Default | Description                                            |
-| ---------------------- | --------- | ------- | ------------------------------------------------------ |
-| `use_default_mappings` | `boolean` | `true`  | Whether to use default key mappings                    |
-| `show_help_on_open`    | `boolean` | `true`  | Show help screen when terminal opens                   |
-| `new_lines_amount`     | `number`  | `2`     | Number of new lines to insert after command submission |
-| `window_width`         | `number`  | `64`    | Default width for the terminal window                  |
+| Option                 | Type      | Default    | Description                                                          |
+| ---------------------- | --------- | ---------- | -------------------------------------------------------------------- |
+| `use_default_mappings` | `boolean` | `true`     | Whether to use default key mappings                                  |
+| `show_help_on_open`    | `boolean` | `true`     | Show help screen when terminal opens                                 |
+| `new_lines_amount`     | `number`  | `2`        | Number of new lines to insert after command submission               |
+| `window_width`         | `number`  | `64`       | Default width for the terminal window                                |
+| `open_mode`            | `string`  | `"normal"` | Mode to open Cursor Agent: `"normal"`, `"plan"`, or `"auto-run"`     |
+| `cursor_window_keys`   | `table`   | See below  | Key mappings for the Cursor Agent window (all values must be arrays) |
+
+#### `open_mode` Values
+
+- `"normal"` - Opens Cursor Agent in normal interactive mode (default)
+- `"plan"` - Opens Cursor Agent in plan mode (`--plan` flag)
+- `"auto-run"` - Opens Cursor Agent in auto-run mode (`--auto-run` flag)
+
+### `cursor_window_keys` Structure
+
+The `cursor_window_keys` option allows you to customize all key mappings for the Cursor Agent terminal window.
+**All values must be arrays**, even if you only want to configure one key combination. This allows you to set
+multiple key combinations for the same action.
+
+#### Terminal Mode Keys
+
+| Key                  | Default                     | Description                         |
+| -------------------- | --------------------------- | ----------------------------------- |
+| `normal_mode`        | `{ "<M-q>" }`               | Enter normal mode                   |
+| `insert_file_path`   | `{ "<C-p>" }`               | Insert current file path            |
+| `insert_all_buffers` | `{ "<C-p><C-p>" }`          | Insert all open buffer paths        |
+| `new_lines`          | `{ "<CR><CR>" }`            | Insert new lines                    |
+| `submit`             | `{ "<C-s>" }`               | Submit command/message              |
+| `enter`              | `{ "<CR>" }`                | Enter key                           |
+| `help`               | `{ "<M-?>", "??", "\\\\" }` | Show help (multiple keys supported) |
+| `toggle_width`       | `{ "<C-f>" }`               | Toggle window width                 |
+
+#### Normal Mode Keys
+
+| Key            | Default       | Description         |
+| -------------- | ------------- | ------------------- |
+| `hide`         | `{ "<Esc>" }` | Hide terminal       |
+| `toggle_width` | `{ "<C-f>" }` | Toggle window width |
+
+#### Example: Custom Key Configuration
+
+```lua
+require("cursor-agent").setup({
+  cursor_window_keys = {
+    terminal_mode = {
+      submit = { "<C-s>", "<C-Enter>" },  -- Multiple keys for submit
+      help = { "??", "F1" },              -- Custom help keys
+      toggle_width = { "<C-f>", "<C-w>" }, -- Multiple toggle options
+    },
+    normal_mode = {
+      hide = { "<Esc>", "q" },            -- Multiple hide options
+    },
+  },
+})
+```
 
 ## 🎮 Usage
 
+### Caveats
+
+- **⚠️ The main commands are `:CursorAgent open_cwd`, `:CursorAgent open_root`, and `:CursorAgent session_list`.
+  Each of these will open its own terminal (`win` and `buf`) or toggle to it if it's already open** This is handled by [Snacks.nvim](https://github.com/folke/snacks.nvim)'s `terminal()`.
+- If you submit a prompt. A `cursor-agent` session will be created. If you want to continue the conversation,
+  you need to use the `:CursorAgent session_list` command to see the list of sessions and then open the session you want to continue.
+  (As we just said, this will open/toggle its own terminal).
+- For convenience, the default "Enter" key (`<CR>`) is remapped to the "Tab" key (`<Tab>`)
+  You can change this to whatever you want by changing the `cursor_window_keys.terminal_mode.enter` keymap.
+
 ### Commands
 
-The plugin provides a single command with multiple subcommands:
+The plugin provides a single command with multiple sub-commands:
 
 ```vim
 :CursorAgent [subcommand]
 ```
 
-**Available subcommands:**
+**Available sub-commands:**
 
 - `:CursorAgent` or `:CursorAgent open_cwd` - Open in current file's directory
 - `:CursorAgent open_root` - Open in project root (git root)
@@ -206,13 +272,6 @@ cursor-agent.nvim/
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to submit issues and pull requests.
-
-## 📝 TODO
-
-- [ ] Make keymaps fully configurable
-- [ ] Add more commands and options
-- [ ] Add tests
-- [ ] Add documentation generation
 
 ## 📄 License
 
