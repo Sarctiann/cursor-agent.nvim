@@ -89,9 +89,9 @@ require("cursor-agent").setup({
       normal_mode = { "<M-q>" },
       insert_file_path = { "<C-p>" },
       insert_all_buffers = { "<C-p><C-p>" },
-      new_lines = { "<CR><CR>" },
+      new_lines = { "<CR>" }, -- suggested alternative: { "<CR><CR>" }
       submit = { "<C-s>" },
-      enter = { "<CR>" },
+      enter = { "<tab>" }, -- suggested alternative: { "<CR>" }
       help = { "<M-?>", "??", "\\\\" },
       toggle_width = { "<C-f>" },
     },
