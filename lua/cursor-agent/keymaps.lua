@@ -25,10 +25,10 @@ function M.setup_terminal_keymaps()
 	-- NOTE: Prevent default Enter key behavior
 	vim.keymap.set("t", "<CR>", "", opts)
 	-- NOTE: Map arrow keys
-	vim.keymap.set("t", "<C-h>", "<Left>", opts)
-	vim.keymap.set("t", "<C-j>", "<Down>", opts)
-	vim.keymap.set("t", "<C-k>", "<Up>", opts)
-	vim.keymap.set("t", "<C-l>", "<Right>", opts)
+	vim.keymap.set("t", "<M-h>", "<Left>", opts)
+	vim.keymap.set("t", "<M-j>", "<Down>", opts)
+	vim.keymap.set("t", "<M-k>", "<Up>", opts)
+	vim.keymap.set("t", "<M-l>", "<Right>", opts)
 
 	-- Normal mode keymaps
 	set_keymaps("t", keys.terminal_mode.normal_mode, [[<C-\><C-n>5(]], opts)
