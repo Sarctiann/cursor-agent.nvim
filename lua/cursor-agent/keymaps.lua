@@ -7,7 +7,7 @@ local config = require("cursor-agent.config")
 local M = {}
 
 --- Helper function to set multiple keymaps for the same action
---- @param mode string The vim mode (e.g., "t", "n", "i", "v")
+--- @param mode string|string[] The vim mode (e.g., "t", "n", "i", "v")
 --- @param keys string[] Array of key combinations
 --- @param callback function|string The function to call | or command to execute
 --- @param opts table Options for vim.keymap.set
@@ -55,7 +55,7 @@ function M.setup_terminal_keymaps()
 	end, opts)
 
 	-- Submit commands
-	set_keymaps("t", keys.terminal_mode.submit, function()
+	set_keymaps({ "n", "t" }, keys.terminal_mode.submit, function()
 		vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Enter>", true, false, true), "n")
 	end, opts)
 
