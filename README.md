@@ -89,9 +89,13 @@ require("cursor-agent").setup({
       normal_mode = { "<M-q>" },
       insert_file_path = { "<C-p>" },
       insert_all_buffers = { "<C-p><C-p>" },
-      new_lines = { "<CR>" }, -- suggested alternative: { "<CR><CR>" }
-      submit = { "<C-s>" },
-      enter = { "<tab>" }, -- suggested alternative: { "<CR>" }
+
+      -- You might want to change these "enter" related keys
+      -- depending on your configuration or your terminal behavior
+      new_lines = { "<S-CR>" },
+      submit = { "<C-s>", "<C-CR>" },
+      enter = { "<CR>" },
+
       help = { "<M-?>", "??", "\\\\" },
       toggle_width = { "<C-f>" },
     },
